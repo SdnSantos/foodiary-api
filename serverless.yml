@@ -3,6 +3,9 @@ org: sidneyssantos
 # "service" is the name of this project. This will also be added to your AWS resource names.
 service: foodiary-api
 
+plugins:
+  - serverless-offline
+
 provider:
   name: aws
   region: sa-east-1
