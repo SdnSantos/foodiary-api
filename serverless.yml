@@ -9,16 +9,26 @@ provider:
   runtime: nodejs22.x
   architecture: arm64
 
+package:
+  individually: true
+
 # esbuild
 build:
   esbuild:
     minify: true
-    sourcemaps: false
+    sourcemap: false
 
 functions:
-  hello:
-    signin: src/signin.handler
+  signin:
+    handler: src/signin.handler
     events:
       - httpApi:
-          path: /
-          method: get
+          method: POST
+          path: /signin
+
+  signup:
+    handler: src/signup.handler
+    events:
+      - httpApi:
+          method: POST
+          path: /signup
