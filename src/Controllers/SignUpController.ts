@@ -4,6 +4,8 @@ import { HttpRequest, HttpResponse } from "../types/Http";
 import { badRequest, conflict, created } from "../utils/http";
 import { db } from '../db';
 import { eq } from 'drizzle-orm';
+import { hash } from 'bcryptjs';
+
 import { usersTable } from '../db/schema';
 
 const schema = z.object({
@@ -39,11 +41,14 @@ export class SignUpController {
       return conflict({ error: 'This email is already in use.'})
     }
 
+    const hashedPassword = await hash(data.account.password, 12);
+
     const [user] = await db
       .insert(usersTable)
       .values({
         ...data,
         ...data.account,
+        password: hashedPassword,
         calories: 0,
         carbohydrates: 0,
         fats: 0,
