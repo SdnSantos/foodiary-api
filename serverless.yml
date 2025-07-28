@@ -11,8 +11,10 @@ provider:
   region: sa-east-1
   runtime: nodejs22.x
   architecture: arm64
+  timeout: 20
   environment:
     DATABASE_URL: ${env:DATABASE_URL}
+    JWT_SECRET: ${env:JWT_SECRET}
 
 package:
   individually: true

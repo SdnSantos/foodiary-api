@@ -7,6 +7,7 @@ import { badRequest, ok, unathorized } from "../utils/http";
 import { db } from '../db';
 import { usersTable } from '../db/schema';
 import { eq } from 'drizzle-orm';
+import { signAccessTokenFor } from '../lib/jwt';
 
 const schema = z.object({
   email: z.email(),
@@ -40,6 +41,8 @@ export class SignInController {
       return unathorized({ error: 'Invalid credentials.' });
     }
 
-    return ok({ user });
+    const accessToken = signAccessTokenFor(user.id);
+
+    return ok({ accessToken });
   }
 }
