@@ -67,3 +67,10 @@ functions:
       - httpApi:
           method: GET
           path: /meals/{mealId}
+
+resources: 
+  Resources:
+    UploadsBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: foodiary-uploads-sdn
