@@ -30,7 +30,6 @@ export const usersTable = pgTable('users', {
 
 export const mealStatus = pgEnum('meal_status', [
   'uploading',
-  'queue',
   'processing',
   'success',
   'failed',
